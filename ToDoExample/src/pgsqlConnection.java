@@ -2,12 +2,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/*
+* TODO:
+*  Change the entire class as a singleton desing pattern
+*  Modify the rest of the functions to make sure there is only one call*/
+
 public class pgsqlConnection {
     //Setting variables to connect with the test DB
-    Connection pgsqlConn;
-    String jdbcURL;
-    String dbUser;
-    String dbPass;
+    private Connection pgsqlConn;
+    private String jdbcURL;
+    private String dbUser;
+    private String dbPass;
 
     public pgsqlConnection() {
         jdbcURL = null;
@@ -18,9 +23,6 @@ public class pgsqlConnection {
 
     //Get the pgsql connection with the DB
     public Connection getPgsqlConnection (String jdbcURL, String dbUser, String dbPass) {
-        //Initialize all the variables;
-        new pgsqlConnection();
-
         //Assign the new values to all the strings
         this.jdbcURL = jdbcURL;
         this.dbUser = dbUser;
