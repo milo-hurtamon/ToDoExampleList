@@ -18,7 +18,7 @@ public class pgsqlCRUD {
     // Function that allow us to insert any new register
     public void insertToDoList(Connection conn, String description, String date, Boolean completed, String observation) throws SQLException {
         this.pgsqlStatement = conn.createStatement();
-        this.sqlStmnt = "INSERT INTO todolist (description, todo_date, completed, observation) VALUES('"+description+"','"+date+"','"+completed+"','"+observation+"')";
+        this.sqlStmnt = "INSERT INTO todolist (description, todo_date, completed, observation) VALUES('"+description+"','"+date+"',"+completed+",'"+observation+"')";
         this.pgsqlStatement.executeUpdate(this.sqlStmnt);
         this.pgsqlStatement.close();
     }
@@ -29,14 +29,24 @@ public class pgsqlCRUD {
 
         // Analize what kind of query we are looking forward
         if (typeOfFetch == "A") {
-            this.queryToFetch = "SELECT description, todo_date, completed, observation FROM todolist;";
+            this.queryToFetch = "SELECT * FROM todolist;";
         } else if (typeOfFetch == "C") {
-            this.queryToFetch = "SELECT description, todo_date, completed, observation FROM todolist WHERE completed != false;";
+            this.queryToFetch = "SELECT * FROM todolist WHERE completed != false;";
         } else {
-            this.queryToFetch = "SELECT description, todo_date, completed, observation FROM todolist WHERE completed = false;";
+            this.queryToFetch = "SELECT * FROM todolist WHERE completed = false;";
         }
 
         this.pgsqlFetchResult = this.pgsqlStatement.executeQuery(this.queryToFetch);
         return this.pgsqlFetchResult;
+    }
+
+    // Function that will update an existing record
+    public Integer updateToDoList (Connection conn, Integer todoID, String description, String date, Boolean completed, String observation) throws SQLException {
+        // Something to do here
+        this.pgsqlStatement = conn.createStatement();
+        this.sqlStmnt = "UPDATE todolist SET description = '"+description+"', todo_date = '"+date+"', completed = "+completed+", observation = '"+observation+"' WHERE todoid = "+todoID+";";
+        this.pgsqlStatement.executeUpdate(this.sqlStmnt);
+        this.pgsqlStatement.close();
+        return 200;
     }
 }

@@ -23,13 +23,15 @@ public class pgsqlConnectionTest {
 
         try {
             // Insertion function
+            /*
             pgsqlCD.insertToDoList(connection, "This is the first test", "2024-08-01", false, "");
             pgsqlCD.insertToDoList(connection, "This is the second test", "2024-08-01", true, "");
-            pgsqlCD.insertToDoList(connection, "This is the first test", "2024-08-01", false, "");
-            pgsqlCD.insertToDoList(connection, "This is the third test", "2024-08-01", true, "");
+            pgsqlCD.insertToDoList(connection, "This is the third test", "2024-08-01", false, "");
+            pgsqlCD.insertToDoList(connection, "This is the four test", "2024-08-01", true, "");
+             */
 
             // Fetching all the results
-            queryResult = pgsqlCD.fetchToDoList(connection, "A");
+            queryResult = pgsqlCD.fetchToDoList(connection, "T");
             while (queryResult.next()) {
                 System.out.println("ToDo Description: "+queryResult.getString("description"));
                 System.out.println("ToDo Date: "+queryResult.getDate("todo_date"));
