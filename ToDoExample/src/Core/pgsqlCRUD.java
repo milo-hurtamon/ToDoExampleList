@@ -48,12 +48,17 @@ public class pgsqlCRUD {
     }
 
     // Function that will update an existing record
-    public Integer updateToDoList (Connection conn, Integer todoID, String description, String date, Boolean completed, String observation) throws SQLException {
+    public Integer updateToDoList (Connection conn, Integer todoID, String description, String date, Boolean completed, String observation) {
         // Something to do here
-        this.pgsqlStatement = conn.createStatement();
-        this.sqlStmnt = "UPDATE todolist SET description = '"+description+"', todo_date = '"+date+"', completed = "+completed+", observation = '"+observation+"' WHERE todoid = "+todoID+";";
-        this.pgsqlStatement.executeUpdate(this.sqlStmnt);
-        this.pgsqlStatement.close();
-        return 200;
+        try {
+            this.pgsqlStatement = conn.createStatement();
+            this.sqlStmnt = "UPDATE todolist SET description = '" + description + "', todo_date = '" + date + "', completed = " + completed + ", observation = '" + observation + "' WHERE todoid = " + todoID + ";";
+            this.pgsqlStatement.executeUpdate(this.sqlStmnt);
+            this.pgsqlStatement.close();
+            return 200;
+        } catch (SQLException eSQL) {
+            System.err.println(eSQL.getClass().getName()+": "+eSQL.getMessage());
+            return 500;
+        }
     }
 }
