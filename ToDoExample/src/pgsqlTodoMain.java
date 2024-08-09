@@ -10,6 +10,7 @@ public class pgsqlTodoMain {
     public static String jdbcURL = "jdbc:postgresql://localhost:5432/todo_example";
     public static String username = "pgsql_testrole";
     public static String password = "testingpsswrd";
+    public static Integer updResult = 0;
 
     public static Connection connection = null;
 
@@ -41,6 +42,15 @@ public class pgsqlTodoMain {
                 System.out.println("ToDo Completed: "+queryResult.getBoolean("completed"));
                 System.out.println("ToDo Observation: "+queryResult.getString("observation"));
                 System.out.println();
+            }
+
+            // Updating a single row in the table
+            updResult = pgsqlCD.updateToDoList(connection, 16, "This is the last test and thats it", "2024-08-09", false, "");
+            if (updResult == 200) {
+                System.out.println("Everything was updated fine: "+updResult);
+            }
+            else {
+                System.out.println("There is something wrong with the update: "+updResult);
             }
 
             // DB connection close

@@ -47,6 +47,11 @@ public class pgsqlCRUD {
         return this.pgsqlFetchResult;
     }
 
+    /*
+    TODO:
+        Verify that the register exist first before try to update because the DB will response with 0 is the structure
+        is fine and will not find any kind of problem
+     */
     // Function that will update an existing record
     public Integer updateToDoList (Connection conn, Integer todoID, String description, String date, Boolean completed, String observation) {
         // Something to do here
